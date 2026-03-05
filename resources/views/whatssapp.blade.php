@@ -225,7 +225,7 @@ input.whats-input[type=text]:focus {
                 <i class="material-icons icon-font-color">close</i>
             </button>
             <p>Ingin daftar?</p>
-            <p>silahkan hubungi kami di dengan mengirim pesan ke WhatsApp.</p>
+            <p>silahkan hubungi kami dengan mengirim pesan ke WhatsApp.</p>
         </div>
         <div class="content-whatsapp -bottom">
             <input class="whats-input" id="whats-in" type="text" Placeholder="Send message..." />
