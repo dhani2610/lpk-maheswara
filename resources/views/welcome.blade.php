@@ -922,6 +922,8 @@
             modal.hide();
         }
     </script>
+
+    @include('whatssapp');
 </body>
 
 </html>
