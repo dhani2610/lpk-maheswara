@@ -432,10 +432,46 @@
                 margin-top: 10px;
             }
         }
-        .gallery-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(198, 40, 40, 0.8); display: flex; flex-direction: column;
-            justify-content: center; align-items: center; opacity: 0; transition: 0.3s; color: white; padding: 20px; text-align: center;
+    </style>
+    <style>
+        :root { --primary-red: #c62828; --dark-red: #8e0000; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f8f9fa; color: #333; }
+        .navbar-brand span { font-weight: 800; color: var(--primary-red); }
+
+        /* News Style Header */
+        .article-header { background: white; padding: 40px 0; border-bottom: 1px solid #eee; margin-bottom: 30px; }
+        .breadcrumb-item a { color: var(--primary-red); text-decoration: none; font-size: 0.9rem; }
+        .article-title { font-weight: 800; font-size: 2.8rem; line-height: 1.2; color: #1a1a1a; margin: 20px 0; }
+
+        .featured-image-container {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        .featured-image { width: 100%; max-height: 500px; object-fit: cover; }
+
+        /* Content Area */
+        .article-content { font-size: 1.15rem; line-height: 1.9; color: #444; }
+        .article-content img { max-width: 100%; height: auto; border-radius: 15px; margin: 20px 0; }
+
+        /* Sidebar */
+        .sidebar-card { background: white; border-radius: 15px; padding: 25px; border: none; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .sidebar-title { font-weight: 700; border-left: 4px solid var(--primary-red); padding-left: 15px; margin-bottom: 20px; }
+        .related-item { display: flex; gap: 15px; margin-bottom: 20px; text-decoration: none; color: inherit; }
+        .related-img { width: 80px; height: 80px; border-radius: 10px; object-fit: cover; }
+        .related-title { font-weight: 600; font-size: 0.95rem; line-height: 1.4; transition: 0.3s; }
+        .related-item:hover .related-title { color: var(--primary-red); }
+
+        .btn-cta {
+            background: var(--primary-red); color: white; border-radius: 50px;
+            padding: 15px 30px; font-weight: 700; width: 100%; transition: 0.3s;
+        }
+        .btn-cta:hover { background: var(--dark-red); color: white; transform: translateY(-3px); }
+
+        @media (max-width: 768px) {
+            .article-title { font-size: 1.8rem; }
+            .article-content { font-size: 1.05rem; }
         }
     </style>
 </head>
@@ -460,11 +496,11 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav align-items-lg-center gap-2 gap-lg-3">
-                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">Tentang</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#program">Program</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#gallery">Galeri</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Kontak</a></li>
+                    <li class="nav-item"><a class="nav-link " href="{{ url('/') }}#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/') }}#about">Tentang</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{{ url('/') }}#program">Program</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/') }}#gallery">Galeri</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/') }}#contact">Kontak</a></li>
 
                     <li class="nav-item dropdown ms-lg-2 border-start ps-lg-3 border-secondary-subtle notranslate">
                         <a class="nav-link dropdown-toggle d-flex align-items-center fw-bold" href="#"
@@ -489,224 +525,58 @@
         </div>
     </nav>
 
-    <header id="home">
-        <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                @forelse($sliders as $key => $slider)
-                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}"
-                        style="background-image: url('{{ asset('storage/' . $slider->image) }}');">
-                        <div class="hero-overlay"></div>
-                        <div class="carousel-caption">
-                            @if ($slider->label)
-                                <span
-                                    class="badge bg-primary-red px-3 py-2 mb-4 rounded-pill text-uppercase letter-spacing-1">{{ $slider->label }}</span>
-                            @endif
-                            <h1>{{ $slider->title }}</h1>
-                            @if ($slider->description)
-                                <p>{{ $slider->description }}</p>
-                            @endif
-                            <div class="mt-4">
-                                <a href="#program" class="btn btn-primary-red">Jelajahi Program <i
-                                        class="fa-solid fa-arrow-down ms-2"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                @empty
-                    <div class="carousel-item active"
-                        style="background-image: url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
-                        <div class="hero-overlay"></div>
-                        <div class="carousel-caption">
-                            <h1>Selamat Datang di LPK Maheswara</h1>
-                            <p>Data slider belum ditambahkan di Admin Panel.</p>
-                            <a href="#program" class="btn btn-primary-red mt-3">Jelajahi Program <i
-                                    class="fa-solid fa-arrow-down ms-2"></i></a>
-                        </div>
-                    </div>
-                @endforelse
-            </div>
-
-            @if (count($sliders) > 1)
-                <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                </button>
-            @endif
-        </div>
-    </header>
-
-    <section id="about" class="py-5" style="margin-top: 80px; margin-bottom: 50px;">
-        <div class="container py-4">
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-5 mb-lg-0 px-lg-5">
-                    <div class="about-img-wrapper">
-                        <img src="{{ isset($about->image) ? asset('storage/' . $about->image) : 'https://images.unsplash.com/photo-1513258496099-48168024aec0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }}"
-                            class="img-fluid shadow-lg" alt="Tentang LPK Maheswara">
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <span class="section-subtitle">Mengenal Lebih Dekat</span>
-                    <h2 class="section-title">Lembaga Pelatihan Kerja <br><span
-                            class="text-primary-red notranslate">{{ $setting->site_name ?? 'Maheswara' }}</span></h2>
-
-                    <div class="text-muted content-html mb-4" style="font-size: 1.05rem; line-height: 1.8;">
-                        @if (isset($about->content) && $about->content != '')
-                            {!! $about->content !!}
-                        @else
-                            <p>Silakan perbarui deskripsi profil LPK Maheswara melalui halaman Admin Panel pada menu
-                                Pengaturan Tentang Kami.</p>
-                        @endif
-                    </div>
-
-                    @if (isset($about->checklists) && count($about->checklists) > 0)
-                        <div class="row mt-4 g-3">
-                            @foreach ($about->checklists as $check)
-                                <div class="col-sm-6 d-flex align-items-center">
-                                    <i class="fa-solid fa-check-circle text-primary-red fs-4 me-2"></i>
-                                    <span class="fw-semibold">{{ $check }}</span>
-                                </div>
-                            @endforeach
-                        </div>
-                    @endif
-                </div>
+    <div class="article-header">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url('/') }}">Beranda</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url('/#program') }}">Program</a></li>
+                    <li class="breadcrumb-item active">{{ $program->title }}</li>
+                </ol>
+            </nav>
+            <h1 class="article-title">{{ $program->title }}</h1>
+            <div class="d-flex align-items-center text-muted">
+                <div class="me-3"><i class="fa-regular fa-calendar-check me-1"></i> Terdaftar: {{ $program->created_at ? $program->created_at->format('d M Y') : date('d M Y') }}</div>
+                <div><i class="fa-regular fa-eye me-1"></i> Program Unggulan</div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section id="program" class="py-5 bg-light-red">
-        <div class="container py-5">
-            <div class="text-center mb-5">
-                <span class="section-subtitle">Program Keahlian</span>
-                <h2 class="section-title">Pilihan Program Pelatihan</h2>
-            </div>
-
-            <div class="row g-4 mt-2" id="programContainer">
-                @forelse($programs as $index => $program)
-                    <div class="col-lg-4 col-md-6 program-item {{ $index >= 6 ? 'd-none' : '' }}">
-                        <div class="card card-program h-100" data-bs-toggle="modal"
-                            data-bs-target="#programModal{{ $program->id }}">
-                            <div class="card-img-wrapper">
-                                <img src="{{ asset('storage/' . $program->cover) }}" class="card-img-top w-100"
-                                    alt="{{ $program->title }}">
-                            </div>
-                            <div class="card-body d-flex flex-column">
-                                <h4 class="card-title fw-bold mb-3">{{ $program->title }}</h4>
-                                <p class="card-text text-muted mb-4 flex-grow-1">
-                                    {{ $program->short_description ?? Str::limit(strip_tags($program->content), 100) }}
-                                </p>
-                                <a href="{{ route('program.detail', $program->id) }}" class="program-link">
-                                    Lihat Detail Program <i class="fa-solid fa-arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                @empty
-                    <div class="col-12 text-center text-muted">
-                        <p>Belum ada program pelatihan yang tersedia.</p>
-                    </div>
-                @endforelse
-            </div>
-
-            @if (count($programs) > 6)
-                <div class="text-center mt-5 pt-2">
-                    <button id="btnLoadMoreProgram" class="btn btn-outline-red">Tampilkan Lebih Banyak <i
-                            class="fa-solid fa-rotate-right ms-2"></i></button>
-                </div>
-            @endif
-        </div>
-    </section>
-
-    <section id="gallery" class="py-5 bg-white">
-        <div class="container py-5">
-            <div class="text-center mb-5">
-                <span class="section-subtitle">Dokumentasi</span>
-                <h2 class="section-title">Galeri Kegiatan Kami</h2>
-            </div>
-
-            <div class="row g-4 mt-2" id="galleryContainer">
-                @forelse($galleries as $index => $gallery)
-                    <div class="col-6 col-md-4 {{ $index >= 6 ? 'gallery-extra' : '' }}">
-                        <div class="gallery-item shadow-sm">
-                            <img src="{{ asset('storage/' . $gallery->image) }}" class="gallery-img"
-                                alt="{{ $gallery->title }}">
-                            <div class="gallery-overlay">
-                                <h6 class="fw-bold mb-1">{{ $gallery->title }}</h6>
-                                <small>{{ \Carbon\Carbon::parse($gallery->date)->format('d M Y') }}</small>
-                            </div>
-                        </div>
-                    </div>
-                @empty
-                    <div class="col-12 text-center text-muted">
-                        <p>Belum ada foto galeri kegiatan yang diunggah.</p>
-                    </div>
-                @endforelse
-            </div>
-
-            @if (count($galleries) >= 6)
-                <div class="text-center mt-5 pt-3">
-                    <a href="{{ route('gallery.all') }}" class="btn btn-outline-red px-5 py-2 rounded-pill fw-bold">
-                        Lihat Semua Foto <i class="fa-solid fa-arrow-right ms-2"></i>
-                    </a>
-                </div>
-            @endif
-        </div>
-    </section>
-
-    <section id="contact" class="py-5 bg-light-red">
-        <div class="container py-5">
-            <div class="row g-5 align-items-center">
-                <div class="col-lg-5 pe-lg-5">
-                    <span class="section-subtitle">Hubungi Kami</span>
-                    <h2 class="section-title">Mari Raih Masa Depan Bersama</h2>
-                    <p class="text-muted mb-5">Punya pertanyaan mengenai pendaftaran atau rincian program? Tim kami
-                        siap membantu Anda. Silakan hubungi kontak di bawah ini atau kunjungi langsung kantor kami.</p>
-
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="contact-icon-box">
-                            <i class="fa-solid fa-location-dot"></i>
-                        </div>
-                        <div>
-                            <h6 class="mb-1 fw-bold text-dark">Alamat Kantor</h6>
-                            <p class="text-muted mb-0 small">{{ $contact->address ?? 'Alamat belum diatur' }}</p>
-                        </div>
-                    </div>
-
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="contact-icon-box">
-                            <i class="fa-brands fa-whatsapp"></i>
-                        </div>
-                        <div>
-                            <h6 class="mb-1 fw-bold text-dark">Telepon / WhatsApp</h6>
-                            <p class="text-muted mb-0 small">{{ $contact->phone ?? '-' }}</p>
-                        </div>
-                    </div>
-
-                    <div class="d-flex align-items-center">
-                        <div class="contact-icon-box">
-                            <i class="fa-regular fa-envelope"></i>
-                        </div>
-                        <div>
-                            <h6 class="mb-1 fw-bold text-dark">Email Resmi</h6>
-                            <p class="text-muted mb-0 small">{{ $contact->email ?? '-' }}</p>
-                        </div>
-                    </div>
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="featured-image-container">
+                    <img src="{{ asset('storage/' . $program->cover) }}" class="featured-image" alt="{{ $program->title }}">
                 </div>
 
-                <div class="col-lg-7">
-                    <div class="map-container ratio ratio-4x3 h-100 min-vh-50">
-                        <iframe
-                            src="{{ $contact->embed_map ?? 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.513410660604!2d108.8229893!3d-7.4812301999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e657c000bb70c63%3A0xc0fb176cfd9803eb!2sLPK%20MAHESWARA%20CILACAP!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid' }}"
-                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+                <div class="article-content bg-white p-4 p-md-5 rounded-4 shadow-sm">
+                    {!! $program->content !!}
+                </div>
+            </div>
+
+            <div class="col-lg-4 mt-4 mt-lg-0">
+                <div class="sticky-top" style="top: 100px;">
+                    <div class="sidebar-card mb-4">
+                        <h5 class="sidebar-title">Daftar Sekarang</h5>
+                        <p class="text-muted small">Tertarik dengan program ini? Hubungi admin kami untuk informasi pendaftaran.</p>
+                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $contact->phone ?? '') }}" target="_blank" class="btn btn-cta">
+                            <i class="fa-brands fa-whatsapp me-2"></i> Tanya via WhatsApp
+                        </a>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h5 class="sidebar-title">Program Lainnya</h5>
+                        @foreach($otherPrograms as $other)
+                        <a href="{{ route('program.detail', $other->id) }}" class="related-item">
+                            <img src="{{ asset('storage/' . $other->cover) }}" class="related-img">
+                            <div class="related-title">{{ Str::limit($other->title, 50) }}</div>
+                        </a>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <footer class="text-white pt-5 pb-3">
         <div class="container text-center">
@@ -731,32 +601,6 @@
                     class="notranslate"> {{ $setting->site_name ?? 'LPK Maheswara' }}</span>. All Rights Reserved.</p>
         </div>
     </footer>
-
-    {{-- @foreach ($programs as $program)
-        <div class="modal fade" id="programModal{{ $program->id }}" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content border-0 shadow">
-                    <div class="modal-header bg-primary-red text-white border-0">
-                        <h5 class="modal-title fw-bold"><i class="fa-solid fa-book-open me-2"></i>
-                            {{ $program->title }}</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body p-0">
-                        <img src="{{ asset('storage/' . $program->cover) }}" class="w-100 object-fit-cover"
-                            style="height: 350px;" alt="{{ $program->title }}">
-                        <div class="p-4 content-html text-dark">
-                            {!! $program->content !!}
-                        </div>
-                    </div>
-                    <div class="modal-footer border-top bg-light">
-                        <button type="button" class="btn btn-secondary rounded-pill px-4"
-                            data-bs-dismiss="modal">Tutup</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endforeach --}}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 

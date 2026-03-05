@@ -19,12 +19,30 @@ Route::get('/', function () {
     $sliders = Slider::where('is_active', 1)->get();
     $about = About::first() ?? new About();
     $programs = Program::latest()->get(); // Ambil 6 program terbaru
-    $galleries = Gallery::where('is_active', 1)->orderBy('date', 'desc')->get();
+    $galleries = Gallery::where('is_active', 1)->orderBy('date', 'desc')->limit(6)->get();
     $contact = Contact::first() ?? new Contact();
     $setting = Setting::first() ?? new Setting();
 
     return view('welcome', compact('sliders', 'about', 'programs', 'galleries', 'contact', 'setting'));
 });
+
+Route::get('/program/{id}', function ($id) {
+    $program = Program::where('id', $id)->firstOrFail();
+    $setting = Setting::first() ?? new Setting();
+    $contact = Contact::first() ?? new Contact();
+
+    $otherPrograms = Program::where('id', '!=', $program->id)->limit(3)->get();
+
+    return view('program-detail', compact('program', 'setting', 'contact', 'otherPrograms'));
+})->name('program.detail');
+
+Route::get('/gallery-all', function () {
+    $galleries = Gallery::where('is_active', 1)->orderBy('date', 'desc')->paginate(12); // Pake pagination biar rapi
+    $setting = Setting::first() ?? new Setting();
+    $contact = Contact::first() ?? new Contact();
+    return view('gallery-all', compact('galleries', 'setting', 'contact'));
+})->name('gallery.all');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

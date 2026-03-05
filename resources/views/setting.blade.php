@@ -38,7 +38,7 @@
                 <div class="row">
                     <div class="col-md-4 mb-4 text-center">
                         <label class="form-label fw-bold d-block text-start">Logo Utama Website</label>
-                        <input type="file" name="logo" class="dropify"
+                        <input type="file" name="logo" class="dropify" data-max-file-size="2M"
                                data-height="200"
                                data-default-file="{{ $setting->logo ? asset('storage/' . $setting->logo) : '' }}" />
                         <small class="text-muted mt-2 d-block text-start">Format ideal: PNG dengan latar transparan (Max: 2MB).</small>

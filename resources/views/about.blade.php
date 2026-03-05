@@ -41,7 +41,7 @@
                 <div class="row">
                     <div class="col-md-4 mb-4">
                         <label class="form-label fw-bold">Gambar Representasi</label>
-                        <input type="file" name="image" class="dropify"
+                        <input type="file" name="image" class="dropify" data-max-file-size="2M"
                                data-height="300"
                                data-default-file="{{ $about->image ? asset('storage/' . $about->image) : '' }}" />
                         <small class="text-muted mt-2 d-block">Disarankan format mendatar (Landscape).</small>

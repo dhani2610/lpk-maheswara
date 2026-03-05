@@ -109,7 +109,7 @@
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Gambar (Background)</label>
-                                <input type="file" name="image" class="dropify" data-default-file="{{ asset('storage/' . $slider->image) }}" data-height="120" />
+                                <input type="file" name="image" class="dropify" data-max-file-size="2M" data-default-file="{{ asset('storage/' . $slider->image) }}" data-height="120" />
                                 <small class="text-muted" style="font-size: 12px;">Biarkan kosong jika tidak ingin mengubah gambar.</small>
                             </div>
                             <div class="mb-3">
@@ -178,7 +178,7 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Gambar (Background) <span class="text-danger">*</span></label>
-                            <input type="file" name="image" class="dropify" data-height="120" required />
+                            <input type="file" name="image" class="dropify" data-max-file-size="2M" data-height="120" required />
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Label</label>

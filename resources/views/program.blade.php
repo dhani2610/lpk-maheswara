@@ -95,7 +95,7 @@
                             <div class="row">
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label fw-semibold">Cover Image</label>
-                                    <input type="file" name="cover" class="dropify" data-default-file="{{ asset('storage/' . $program->cover) }}" data-height="150" />
+                                    <input type="file" name="cover" class="dropify" data-max-file-size="2M" data-default-file="{{ asset('storage/' . $program->cover) }}" data-height="150" />
                                     <small class="text-muted" style="font-size: 12px;">Kosongkan jika tidak ubah gambar.</small>
                                 </div>
                                 <div class="col-md-8">
@@ -161,7 +161,7 @@
                         <div class="row">
                             <div class="col-md-4 mb-3">
                                 <label class="form-label fw-semibold">Cover Image <span class="text-danger">*</span></label>
-                                <input type="file" name="cover" class="dropify" data-height="150" required />
+                                <input type="file" name="cover" class="dropify" data-max-file-size="2M" data-height="150" required />
                             </div>
                             <div class="col-md-8">
                                 <div class="mb-3">

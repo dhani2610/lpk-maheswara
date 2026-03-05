@@ -115,7 +115,7 @@
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Upload Foto</label>
-                                <input type="file" name="image" class="dropify"
+                                <input type="file" name="image" class="dropify" data-max-file-size="2M"
                                     data-default-file="{{ asset('storage/' . $gallery->image) }}" data-height="150" />
                                 <small class="text-muted" style="font-size: 12px;">Biarkan kosong jika tidak mengubah
                                     foto.</small>
@@ -191,7 +191,7 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Pilih Foto <span class="text-danger">*</span></label>
-                            <input type="file" name="image" class="dropify" data-height="150" required />
+                            <input type="file" name="image" class="dropify" data-max-file-size="2M" data-height="150" required />
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Judul Kegiatan <span
