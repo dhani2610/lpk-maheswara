@@ -26,7 +26,7 @@
   width: auto;
   height: auto;
   position: fixed;
-  z-index: 8;
+  z-index: 99999;
   bottom: 0px;
   right: 0px;
   padding: 5px;
@@ -44,7 +44,7 @@
   align-content: center;
   width: 60px;
   height: 60px;
-  z-index: 8;
+  z-index: 999;
   transition: 0.3s;
   margin: 10px;
   padding: 7px;

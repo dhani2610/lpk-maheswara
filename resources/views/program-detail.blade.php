@@ -221,7 +221,6 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 10;
         }
 
         .carousel-caption h1 {
@@ -243,7 +242,6 @@
         /* Tentang Kami */
         .about-img-wrapper {
             position: relative;
-            z-index: 1;
         }
 
         .about-img-wrapper::before {
@@ -255,7 +253,6 @@
             height: 100%;
             background-color: var(--primary-red);
             border-radius: 12px;
-            z-index: -1;
             opacity: 0.8;
         }
 
@@ -473,7 +470,55 @@
             .article-title { font-size: 1.8rem; }
             .article-content { font-size: 1.05rem; }
         }
+
+        /* --- Fix Responsiveness Summernote Content Area --- */
+.article-content {
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: #444;
+
+    /* Mencegah teks panjang atau URL panjang tembus ke samping */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-x: hidden; /* Jaga-jaga kalau ada elemen tak terduga */
+}
+
+/* Memaksa gambar mengikuti layar dan mengabaikan inline width/height Summernote */
+.article-content img {
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 15px;
+    margin: 20px 0;
+    display: block; /* Mencegah margin misterius di bawah gambar */
+}
+
+/* Memaksa iframe (seperti YouTube embed) mengikuti lebar layar */
+.article-content iframe,
+.article-content embed,
+.article-content object {
+    max-width: 100% !important;
+}
+
+/* Fix untuk tabel yang dibuat di Summernote agar bisa di-scroll ke samping (horizontal scroll) di HP */
+.article-content table {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scroll di Safari/iOS */
+    border-collapse: collapse;
+}
+
+/* Tambahan opsional agar tabel dari editor tetap enak dibaca */
+.article-content table td,
+.article-content table th {
+    padding: 8px;
+    border: 1px solid #ddd;
+    min-width: 100px; /* Menjaga kolom agar tidak terlalu gepeng di HP */
+}
     </style>
+
 </head>
 
 <body>
